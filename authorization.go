@@ -36,10 +36,11 @@ func addAuthorizedUser( user_name string) error{
     auth_info := AuthorizedInfo{}
     err_json := getAuthorizedUsersJson( &auth_info)
     if err_json != nil{
-        return err_json
+        // Couldn't open a json with list. Consider it empty
+        log.Printf("%v\n", err_json)
     }
     const kAuthUserFile = "authorized.json"
-    file, err := os.OpenFile( kAuthUserFile, os.O_WRONLY | os.O_TRUNC, 0777)
+    file, err := os.OpenFile( kAuthUserFile, os.O_WRONLY | os.O_TRUNC | os.O_CREATE, 0777)
     if err != nil{
         return err
     }
@@ -149,10 +150,6 @@ func setSaltedKeyword( salted_keyword string) error{
  * A wrapper on the bcrypt compare operation
  */
 func checkSaltedKeyword( salted_keyword string, user_input string) error{
-   /* salted_keyword, err := getSaltedKeyword()
-    if err != nil{
-        return err
-    }*/
     salted_keyword1 := []byte( salted_keyword)
     user_input1 := []byte( user_input)
     return bcrypt.CompareHashAndPassword( salted_keyword1, user_input1)
