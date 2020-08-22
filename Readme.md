@@ -1,7 +1,8 @@
 A Telegram bot. Can repeat your words and notify you. Also checks your authorization.
 
-Done features:
+Current features:
 1) Reminding about future events. 
+
 Future features:
 1) Reminding about the next lecture. A classroom, a lecturer's name and other useful things.
 2) Accessing notes repository.
@@ -26,4 +27,4 @@ Add the Internet protocol used to connect to the database server. (ProtocolType)
 
 The bot configuration constants:
 kNotificationsRefreshTime — how often look for expired notifications
-
+kUTCTimeZone — a timezone
